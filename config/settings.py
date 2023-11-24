@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
 ]
 
 CUSTOM_APPS = [
+    'users.apps.UsersConfig',
 ]
 
 SYSTEM_APPS  = [
@@ -157,7 +158,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "users.User"
 
 # Django Rest Framework
 REST_FRAMEWORK = {
