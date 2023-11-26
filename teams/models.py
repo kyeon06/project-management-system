@@ -4,7 +4,7 @@ from users.models import User
 
 
 class Team(BaseModel):
-    name = models.CharField("팀명", max_length=100)
+    name = models.CharField("팀명", max_length=100, unique=True)
     leader = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
