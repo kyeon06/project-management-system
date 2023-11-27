@@ -20,3 +20,7 @@ class TeamDetailSerializer(serializers.ModelSerializer):
             'name',
             'leader'
         ]
+
+
+class TeamInviteSerializer(serializers.Serializer):
+    invite_user = serializers.CharField()
