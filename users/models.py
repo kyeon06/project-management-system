@@ -31,6 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField("계정명", max_length=20, unique=True)
     email = models.EmailField("계정이메일", unique=True, max_length=100)
 
+    invite_message = models.TextField("초대메세지", max_length=300, null=True, blank=True)
+
     is_active = models.BooleanField("활성화여부", default=True)
     is_admin = models.BooleanField("관리자여부", default=False)
     is_superuser = models.BooleanField("superuser 여부", default=False)
