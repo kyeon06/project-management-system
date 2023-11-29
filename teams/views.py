@@ -1,3 +1,5 @@
+from django.contrib.auth.models import Group
+
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -20,6 +22,7 @@ class TeamCreateAPIView(APIView):
                              status.HTTP_201_CREATED : TeamDetailSerializer
                          })
     def post(self, request):
+        user = request.user
         name = request.data.get('name', None)
         data = request.data
 
@@ -30,11 +33,15 @@ class TeamCreateAPIView(APIView):
         if is_exists:
             return Response({"message" : "이미 존재하는 팀명입니다. 다시 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
 
-        data['leader'] = request.user.id
+        data['leader'] = user.id
 
         serializer = TeamSerializer(data=data)
         if serializer.is_valid():
             saved_data = serializer.save()
+
+            # 팀명으로 그룹 생성 및 생성 user를 그룹에 추가
+            group = Group.objects.create(name=name)
+            user.groups.add(group)
 
             return Response(TeamDetailSerializer(saved_data).data, status=status.HTTP_201_CREATED)
         
@@ -71,7 +78,7 @@ class TeamInviteAPIView(APIView):
         
 
         data = {
-            "invite_message" : f"team:{team.name} | from:{team.leader.username}"
+            "invite_message" : f"team:{team.name}|from:{team.leader.username}"
         }
 
         serializer = UserSerializer(invite_user_instance, data=data, partial=True)
