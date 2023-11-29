@@ -71,7 +71,7 @@ class TeamInviteAPIView(APIView):
         
 
         data = {
-            "invite_message" : f"{team.name}팀에 초대되었습니다. from:{team.leader.username}"
+            "invite_message" : f"team:{team.name} | from:{team.leader.username}"
         }
 
         serializer = UserSerializer(invite_user_instance, data=data, partial=True)
