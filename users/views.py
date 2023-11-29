@@ -35,10 +35,26 @@ class SignupView(APIView):
             return Response(data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+# api/v1/users/invite/
+class UserInviteAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        if user.invite_message is None:
+            return Response({"message" : "초대받은 기록이 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        team_name = user.invite_message.split("|")[0].split(":")[1]
+        leader = user.invite_message.split("|")[1].split(":")[1]
+
+        return Response({"message" : f"{leader}님이 {team_name}에 초대하셨습니다."}, status=status.HTTP_200_OK)
+
 
 # api/v1/users/invite/accept/
-class UserInviteAPIView(APIView):
+class UserInviteAcceptAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
