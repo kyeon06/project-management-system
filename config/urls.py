@@ -24,6 +24,7 @@ urlpatterns = [
     # api
     path('api/v1/users/', include('users.urls')),
     path('api/v1/teams/', include('teams.urls')),
+    path('api/v1/kanbans/', include('kanbans.urls')),
 
     # swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
