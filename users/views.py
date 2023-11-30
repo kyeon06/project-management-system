@@ -79,3 +79,23 @@ class UserInviteAcceptAPIView(APIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
+    
+
+# api/v1/users/invite/refuse/
+class UserInviteRefuseAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        invite_message = user.invite_message
+
+        team_name = invite_message.split("|")[0].split(":")[1]
+
+        user.invite_message = None
+        user.save()
+
+        data = {
+            "messsage" : f"{team_name} 초대를 거절하셨습니다."
+        }
+
+        return Response(data, status=status.HTTP_200_OK)

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from users.views import SignupView, UserInviteAPIView, UserInviteAcceptAPIView
+from users.views import SignupView, UserInviteAPIView, UserInviteAcceptAPIView, UserInviteRefuseAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
 
     path('invite/', UserInviteAPIView.as_view(), name='user-invite'),
     path('invite/accept/', UserInviteAcceptAPIView.as_view(), name='user-accept'),
+    path('invite/refuse/', UserInviteRefuseAPIView.as_view(), name='user-refuse'),
 ]
