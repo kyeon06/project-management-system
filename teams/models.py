@@ -9,3 +9,6 @@ class Team(BaseModel):
 
     class Meta:
         db_table = "teams"
+
+    def __str__(self):
+        return self.name

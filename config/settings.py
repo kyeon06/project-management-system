@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
 CUSTOM_APPS = [
     'users.apps.UsersConfig',
     'teams.apps.TeamsConfig',
+    'kanbans.apps.KanbansConfig',
 ]
 
 SYSTEM_APPS  = [
