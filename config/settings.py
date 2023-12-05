@@ -46,6 +46,7 @@ CUSTOM_APPS = [
     'users.apps.UsersConfig',
     'teams.apps.TeamsConfig',
     'kanbans.apps.KanbansConfig',
+    'tickets.apps.TicketsConfig',
 ]
 
 SYSTEM_APPS  = [
